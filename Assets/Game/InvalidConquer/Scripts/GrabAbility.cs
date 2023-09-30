@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterGrab : MonoBehaviour
+public class GrabAbility : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private WheelJoint2D[] wheelJoints;
     public bool isGrabed;
     private Vector3 posOffset;
 
@@ -20,6 +21,18 @@ public class CharacterGrab : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Kinematic;
             posOffset = Graber.instance.transform.position - transform.position;
             isGrabed = true;
+            if (wheelJoints.Length > 0)
+            {
+                SetDefaultAngle();
+            }
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            if (wheelJoints.Length > 0) 
+            {
+                foreach (var item in wheelJoints)
+                { // For stop wheel rotating. Not working
+                    item.GetComponent<Rigidbody2D>().velocity = Vector2.zero; 
+                }
+            }
             return true;
         }
         else
@@ -28,8 +41,14 @@ public class CharacterGrab : MonoBehaviour
         }
     }
 
+    protected virtual void SetDefaultAngle()
+    {
+        transform.eulerAngles = new Vector3(0, 0, 0);
+    }
+
     public void UnGrab()
     {
+        rb.constraints = RigidbodyConstraints2D.None;
         rb.velocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Dynamic;
         isGrabed = false;

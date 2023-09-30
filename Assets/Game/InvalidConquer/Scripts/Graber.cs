@@ -20,7 +20,7 @@ public class Graber : MonoBehaviour
     [SerializeField] private float verticalSpeed;
     private float horizontalInputDirection;
     private Vector2 defaultPosition;
-    private CharacterGrab grubedPlayer;
+    private GrabAbility grubedPlayer;
 
     private bool isPlayerGrubed;
 
@@ -43,9 +43,9 @@ public class Graber : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name.StartsWith("Player"))
+        if (collision.GetComponent<GrabAbility>() != null)
         {
-            CharacterGrab characterGrab = collision.GetComponent<CharacterGrab>();
+            GrabAbility characterGrab = collision.GetComponent<GrabAbility>();
             if (characterGrab.TryGrab())
             {
                 state = GraberState.GoingUp;
@@ -53,7 +53,7 @@ public class Graber : MonoBehaviour
                 isPlayerGrubed = true;
             }
         }
-        else if (collision.name.StartsWith("Player") == false)
+        else if (collision.GetComponent<GrabAbility>() == null)
         {
             state = GraberState.GoingUp;
         }
