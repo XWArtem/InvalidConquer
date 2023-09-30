@@ -13,9 +13,30 @@ public class DemoData {
         }
     }
 
-    public int TopScore {
-        get => PlayerPrefs.GetInt("demoTopScore", 0); 
-        set => PlayerPrefs.SetInt("demoTopScore", value);
+    public bool Level1Opened
+    {
+        get => bool.Parse(PlayerPrefs.GetString("Level1Opened", "true"));
+        set => PlayerPrefs.SetString("Level1Opened", value.ToString());
+    }
+    public bool Level2Opened
+    {
+        get => bool.Parse(PlayerPrefs.GetString("Level2Opened", "false"));
+        set => PlayerPrefs.SetString("Level2Opened", value.ToString());
+    }
+    public bool Level3Opened
+    {
+        get => bool.Parse(PlayerPrefs.GetString("Level3Opened", "false"));
+        set => PlayerPrefs.SetString("Level3Opened", value.ToString());
+    }
+    public bool Level4Opened
+    {
+        get => bool.Parse(PlayerPrefs.GetString("Level4Opened", "false"));
+        set => PlayerPrefs.SetString("Level4Opened", value.ToString());
+    }
+    public bool Level5Opened
+    {
+        get => bool.Parse(PlayerPrefs.GetString("Level5Opened", "false"));
+        set => PlayerPrefs.SetString("Level5Opened", value.ToString());
     }
 
     public int SubIndex {
@@ -34,12 +55,12 @@ public class DemoData {
     }
     public float DemoMusicVolume
     {
-        get => PlayerPrefs.GetFloat("demoMusicVolume", 1);
+        get => PlayerPrefs.GetFloat("demoMusicVolume", 0.5f);
         set => PlayerPrefs.SetFloat("demoMusicVolume", value);
     }
     public float DemoSoundVolume
     {
-        get => PlayerPrefs.GetFloat("demoSoundVolume", 1);
+        get => PlayerPrefs.GetFloat("demoSoundVolume", 0.7f);
         set => PlayerPrefs.SetFloat("demoSoundVolume", value);
     }
 }
