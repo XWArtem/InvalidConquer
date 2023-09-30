@@ -27,6 +27,12 @@ public class LevelManager : MonoBehaviour
     public void FinishLevel()
     {
         Time.timeScale = 0f;
+        //popup
+    }
 
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+        //popup
     }
 }

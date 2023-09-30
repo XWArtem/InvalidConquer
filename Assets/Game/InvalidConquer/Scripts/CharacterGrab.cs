@@ -30,6 +30,7 @@ public class CharacterGrab : MonoBehaviour
 
     public void UnGrab()
     {
+        rb.velocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Dynamic;
         isGrabed = false;
         rb.velocity += new Vector2(Graber.instance.rb.velocity.x * 0.8f, 0f);
