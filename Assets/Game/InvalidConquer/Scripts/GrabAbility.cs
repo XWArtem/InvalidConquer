@@ -30,7 +30,7 @@ public class GrabAbility : MonoBehaviour
             {
                 foreach (var item in wheelJoints)
                 { // For stop wheel rotating. Not working
-                    item.GetComponent<Rigidbody2D>().velocity = Vector2.zero; 
+                    item.GetComponent<Rigidbody2D>().angularVelocity = 0f;
                 }
             }
             return true;
