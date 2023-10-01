@@ -4915,7 +4915,7 @@ Transform:
   m_GameObject: {fileID: 3392499840991320780}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9112501, y: -1.20175, z: 0}
+  m_LocalPosition: {x: 0.9112501, y: -1.224, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5049,12 +5049,12 @@ WheelJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.91124964, y: -1.20175}
+  m_ConnectedAnchor: {x: 0.91125023, y: -1.2240002}
   m_Suspension:
     m_DampingRatio: 0.7
-    m_Frequency: 8
+    m_Frequency: 12
     m_Angle: 90
   m_UseMotor: 0
   m_Motor:
@@ -5089,7 +5089,7 @@ Transform:
   m_GameObject: {fileID: 4426273442609974644}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.04, y: -0.8, z: 0}
+  m_LocalPosition: {x: -1.04, y: -0.801, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5223,12 +5223,12 @@ WheelJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.7820003, y: -0.7719999}
+  m_ConnectedAnchor: {x: -1.0399996, y: -0.80099964}
   m_Suspension:
     m_DampingRatio: 0.7
-    m_Frequency: 8
+    m_Frequency: 12
     m_Angle: 90
   m_UseMotor: 0
   m_Motor:
@@ -5349,7 +5349,7 @@ Transform:
   m_GameObject: {fileID: 8472434267703639354}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.43, y: -1.9, z: 0}
+  m_LocalPosition: {x: -2.43, y: -1.41, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5423,7 +5423,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 4
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -5500,20 +5500,20 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.62301195, y: -0.9678301}
-      - {x: 0.91924536, y: -0.8711095}
-      - {x: 1.4673674, y: -0.8201359}
+    - - {x: 0.43682313, y: -0.1865423}
+      - {x: 0.78612316, y: -0.35629806}
+      - {x: 1.4008069, y: -0.34981948}
       - {x: 0.6789969, y: -0.026938647}
-      - {x: -0.25873324, y: 0.015783548}
+      - {x: -0.23206972, y: 0.2023774}
       - {x: -0.054720834, y: 1.3114626}
-      - {x: -0.26695153, y: 1.487512}
+      - {x: -0.26695156, y: 1.487512}
       - {x: -0.60387397, y: 1.4741025}
-      - {x: -0.7892743, y: 1.1896641}
-      - {x: -1.0983738, y: 1.1634312}
-      - {x: -1.0680761, y: -0.11616384}
-      - {x: -0.91447026, y: -0.013508536}
-      - {x: -0.15052938, y: -0.1562891}
-      - {x: 0.018114418, y: -0.9483372}
+      - {x: -0.7937184, y: 1.291876}
+      - {x: -1.0228261, y: 1.287863}
+      - {x: -1.0591247, y: 0.41675544}
+      - {x: -0.6879344, y: 0.39506018}
+      - {x: -0.057277903, y: -0.036409557}
+      - {x: 0.12911496, y: -0.23795512}
   m_UseDelaunayMesh: 0
 --- !u!61 &4726029240491089104
 BoxCollider2D:
