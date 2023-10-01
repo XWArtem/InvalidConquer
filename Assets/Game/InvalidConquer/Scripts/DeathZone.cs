@@ -9,7 +9,7 @@ public class DeathZone : MonoBehaviour
     {
         if (collision.name.StartsWith(PLAYER))
         {
-            LevelManager.instance.GameOver();
+            LevelManager.instance.ZoneDeath();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.PackageManager.UI;
 
 public enum LevelStates
 { 
@@ -16,8 +17,19 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private float overallTimeForLvl;
     [SerializeField] private Image blackTint;
+    [SerializeField] private RectTransform gameOverWindow;
     private float timeLeft;
     private bool isGrabbing;
+    private float gameOverWindowStartY = 450f;
+    private bool gameIsOn;
+
+    private static readonly List<float> curveValues = new List<float>() // 20 first
+        {
+            0f, 0f, 0f, 0.004f, 0.01f, 0.015f, 0.05f, 0.07f, 0.09f,
+            0.15f, 0.2f, 0.25f, 0.3f, 0.35f, 0.41f, 0.48f, 0.56f, 0.64f,
+            0.78f, 0.84f, 0.88f, 0.93f, 0.97f, 1f, 1.04f, 1.065f, 1.09f,
+            1.12f, 1.125f, 1.13f, 1.13f, 1.12f, 1.09f, 1.07f, 1.03f, 1f
+        };
 
     private void Awake()
     {
@@ -31,8 +43,8 @@ public class LevelManager : MonoBehaviour
         }
         isGrabbing = false;
         timeLeft = overallTimeForLvl;
-
-        StartCoroutine(nameof(BlackTintSmoothAnim), false);
+        UpdateTimerTxt();
+        gameIsOn = true;
     }
 
     private void OnEnable()
@@ -45,6 +57,11 @@ public class LevelManager : MonoBehaviour
         StaticActions.OnMainHeroGrabbed -= UpdateGrabbingState;
     }
 
+    private void Start()
+    {
+        StartCoroutine(nameof(BlackTintSmoothAnim), false);
+    }
+
     private void UpdateGrabbingState(bool isGrabbing) => this.isGrabbing = isGrabbing;
 
     public void FinishLevel()
@@ -53,11 +70,20 @@ public class LevelManager : MonoBehaviour
         //popup
     }
 
-    public void GameOver()
+    public IEnumerator GameOverView()
     {
-        //Time.timeScale = 0f;
-        StartCoroutine(nameof(BlackTintSmoothAnim), true);
+        Debug.Log("GameOver");
         //popup
+        gameOverWindow.anchoredPosition = new Vector3(0f, gameOverWindowStartY);
+        int frame = 0;
+
+        while (frame < curveValues.Count)
+        {
+            gameOverWindow.anchoredPosition = new Vector3(0f, gameOverWindowStartY - 2f * gameOverWindowStartY * curveValues[frame]);
+            frame++;
+            yield return new WaitForFixedUpdate();
+        }
+        gameOverWindow.anchoredPosition = new Vector3(0f, -gameOverWindowStartY);
     }
 
     private void UpdateTimerTxt()
@@ -71,10 +97,11 @@ public class LevelManager : MonoBehaviour
         {
             timeLeft -= Time.deltaTime;
             UpdateTimerTxt();
-            if (timeLeft <= 0f)
+            if (timeLeft <= 0f && gameIsOn)
             {
                 Graber.instance.ForceUngrab();
                 StartCoroutine(nameof(GameOverDelayed));
+                gameIsOn = false;
             }
         }
     }
@@ -82,11 +109,19 @@ public class LevelManager : MonoBehaviour
     private IEnumerator GameOverDelayed()
     {
         yield return new WaitForSeconds(4f);
-        StartCoroutine(nameof(BlackTintSmoothAnim), true);
-        
+        StartCoroutine(nameof(BlackTintSmoothAnim), true); 
     }
 
-    private IEnumerator BlackTintSmoothAnim(bool setActive)
+    public void ZoneDeath()
+    {
+        if (gameIsOn)
+        {
+            StartCoroutine(nameof(BlackTintSmoothAnim), true);
+            gameIsOn = false;
+        }
+    }
+
+    public IEnumerator BlackTintSmoothAnim(bool setActive)
     {
         if (setActive)
         {
@@ -101,11 +136,12 @@ public class LevelManager : MonoBehaviour
             }
             blackTint.color = new Color32(55, 55, 55, 255);
 
-            GameOver();
+            StartCoroutine(nameof(GameOverView));
             yield return null;
         }
         else
         {
+            blackTint.gameObject.SetActive(true);
             byte a = 255;
             blackTint.color = new Color32(55, 55, 55, a);
             while (a > 6)

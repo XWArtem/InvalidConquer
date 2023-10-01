@@ -156,21 +156,6 @@ public class Graber : MonoBehaviour
             default:
                 break;
         }
-        transform.eulerAngles = Vector3.zero;
-
-        //if (transform.rotation.eulerAngles.z > 0.5f)
-        //{
-        //    transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, transform.rotation.z - 5f));
-        //    Debug.Log("Auto rotating");
-        //}
-        //else if (transform.rotation.eulerAngles.z < -0.5f)
-        //{
-        //    transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, transform.rotation.z + 5f));
-        //    Debug.Log("Auto rotating");
-        //}
-        //else
-        //{
-        //    transform.rotation = Quaternion.Euler(Vector3.zero);
-        //}
+        //transform.eulerAngles = Vector3.zero;
     }
 }
