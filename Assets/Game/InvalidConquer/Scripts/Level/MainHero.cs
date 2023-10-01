@@ -67,7 +67,7 @@ public class MainHero : MonoBehaviour
         this.isScared = isScared;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isGrounded) return;
         if (collision.gameObject.layer == groundLayer)
@@ -80,4 +80,18 @@ public class MainHero : MonoBehaviour
             }
         }
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (isGrounded) return;
+    //    if (collision.gameObject.layer == groundLayer)
+    //    {
+    //        landingParticles.Play();
+    //        isGrounded = true;
+    //        if (DemoAudioManager.instance != null)
+    //        {
+    //            DemoAudioManager.instance.PlayClipByIndex(1);
+    //        }
+    //    }
+    //}
 }
