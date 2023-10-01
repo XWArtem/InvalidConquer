@@ -69,7 +69,17 @@ public class Graber : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         state = GraberState.GoingUp;
         grubedPlayer = charToGrab;
-        isPlayerGrubed = true;
+
+        // don't touch it, otherwise there will be a bug
+        if (Input.GetMouseButton(0))
+        {
+            isPlayerGrubed = true;
+        }
+        else
+        {
+            grubedPlayer.UnGrab();
+            isPlayerGrubed = false;
+        }
     }
 
     public void ForceUngrab()

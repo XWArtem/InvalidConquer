@@ -52,7 +52,7 @@ public class GrabAbility : MonoBehaviour
 
     protected virtual void SetDefaultAngle()
     {
-        transform.eulerAngles = new Vector3(0, 0, 0);
+        //transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
     public void UnGrab()
