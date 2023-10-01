@@ -29,6 +29,10 @@ public class Dynamite : MonoBehaviour
         fetil.SetActive(true);
         yield return new WaitForSeconds(2f);
         boomParticles.Play();
+        if (DemoAudioManager.instance != null)
+        {
+            DemoAudioManager.instance.PlayClipByIndex(3);
+        }
         playerDinamyteBoost.Explode(transform);
         TNTBarrels.SetActive(false);
     }

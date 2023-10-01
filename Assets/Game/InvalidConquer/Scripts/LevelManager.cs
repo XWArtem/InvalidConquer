@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private Image timerClockImg;
     [SerializeField] private float overallTimeForLvl;
     [SerializeField] private Image blackTint;
     [SerializeField] private RectTransform gameOverWindow;
@@ -69,6 +70,8 @@ public class LevelManager : MonoBehaviour
         //popup
     }
 
+    
+
     public IEnumerator GameOverView()
     {
         Debug.Log("GameOver");
@@ -88,6 +91,7 @@ public class LevelManager : MonoBehaviour
     private void UpdateTimerTxt()
     {
         timerText.text = ((int)timeLeft).ToString();
+        timerClockImg.fillAmount = timeLeft / overallTimeForLvl;
     }
 
     private void Update()

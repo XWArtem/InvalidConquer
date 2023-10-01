@@ -19,6 +19,7 @@ public class Graber : MonoBehaviour
     [SerializeField] private GraberState state;
     [SerializeField] private float horizontalSpeed;
     [SerializeField] private float verticalSpeed;
+    [SerializeField] private Transform leftBorder, rightBorder;
     private float horizontalInputDirection;
     private Vector2 defaultPosition;
     private GrabAbility grubedPlayer;
@@ -101,11 +102,13 @@ public class Graber : MonoBehaviour
 
     private void SetHorizontalDirection()
     {
-        if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x < -0.2)
+        if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x < -0.2 &&
+            transform.position.x > leftBorder.position.x)
         {
             horizontalInputDirection = Mathf.Max(-6, horizontalInputDirection - 0.4f);
         }
-        else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x > 0.2)
+        else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x > 0.2 &&
+            transform.position.x < rightBorder.position.x)
         {
             horizontalInputDirection = Mathf.Min(6, horizontalInputDirection + 0.4f);
         }
@@ -128,6 +131,13 @@ public class Graber : MonoBehaviour
                 state = GraberState.GoingDown;
                 Debug.Log("X: " + mousePos.x);
                 Debug.Log("Y: " + mousePos.y);
+            }
+            if (state == GraberState.GoingDown)
+            {
+                if (transform.position.y < Camera.main.transform.position.y - 6f)
+                {
+                    state = GraberState.GoingUp;
+                }
             }
         }
         if (Input.GetMouseButtonUp(0))

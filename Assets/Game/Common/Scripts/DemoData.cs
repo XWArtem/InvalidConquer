@@ -38,7 +38,11 @@ public class DemoData {
         get => bool.Parse(PlayerPrefs.GetString("Level5Opened", "true"));
         set => PlayerPrefs.SetString("Level5Opened", value.ToString());
     }
-
+    public bool Level6Opened
+    {
+        get => bool.Parse(PlayerPrefs.GetString("Level6Opened", "true"));
+        set => PlayerPrefs.SetString("Level6Opened", value.ToString());
+    }
     public int SubIndex {
         get => PlayerPrefs.GetInt($"Index", 0);
         set => PlayerPrefs.SetInt($"Index", value);

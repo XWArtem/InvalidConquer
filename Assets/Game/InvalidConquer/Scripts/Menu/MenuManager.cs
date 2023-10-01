@@ -13,11 +13,12 @@ public class MenuManager : MonoBehaviour
         "Level2",
         "Level3",
         "Level4",
-        "Level5"
+        "Level5",
+        "Level6"
     };
 
     [SerializeField] private GameObject settingsMenuPanel;
-    [SerializeField] private Image lvl1, lvl2, lvl3, lvl4, lvl5;
+    [SerializeField] private Image lvl1, lvl2, lvl3, lvl4, lvl5, lvl6;
     [SerializeField] private Sprite levelLocked, levelUnlocked;
     private float timeToCompleteAnim = 1f;
     private float timePassed;
@@ -56,6 +57,8 @@ public class MenuManager : MonoBehaviour
         else lvl4.sprite = levelLocked;
         if (DemoData.Instance.Level5Opened) lvl5.sprite = levelUnlocked;
         else lvl5.sprite = levelLocked;
+        if (DemoData.Instance.Level6Opened) lvl6.sprite = levelUnlocked;
+        else lvl6.sprite = levelLocked;
     }
 
     public void SettingsOpen()
@@ -153,6 +156,10 @@ public class MenuManager : MonoBehaviour
             return;
         }
         else if (index == 5 && !DemoData.Instance.Level5Opened)
+        {
+            return;
+        }
+        else if (index == 6 && !DemoData.Instance.Level6Opened)
         {
             return;
         }
