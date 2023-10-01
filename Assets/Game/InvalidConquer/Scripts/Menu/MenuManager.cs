@@ -92,7 +92,6 @@ public class MenuManager : MonoBehaviour
 
     private IEnumerator ShowSequence(RectTransform window)
     {
-
         window.anchoredPosition = new Vector3(0f, startY);
         isBusy = true;
         int frame = 0;
@@ -120,7 +119,6 @@ public class MenuManager : MonoBehaviour
         }
 
         window.anchoredPosition = new Vector3(0f, startY);
-        settingsMenuPanel.SetActive(false);
         isBusy = false;
     }
 

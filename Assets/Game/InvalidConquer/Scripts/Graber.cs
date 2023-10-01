@@ -72,6 +72,18 @@ public class Graber : MonoBehaviour
         isPlayerGrubed = true;
     }
 
+    public void ForceUngrab()
+    {
+        if (grubedPlayer)
+        {
+            grubedPlayer.UnGrab();
+            isPlayerGrubed = false;
+        }
+
+
+        state = GraberState.GoingUp;
+    }
+
     private void SetHorizontalDirection()
     {
         if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x < -0.1)
@@ -144,17 +156,21 @@ public class Graber : MonoBehaviour
             default:
                 break;
         }
-        if (transform.rotation.eulerAngles.z > 0.5f)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, transform.rotation.z - transform.rotation.z * 0.02f));
-        }
-        else if (transform.rotation.eulerAngles.z < -0.5f)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, transform.rotation.z + transform.rotation.z * 0.02f));
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(Vector3.zero);
-        }
+        transform.eulerAngles = Vector3.zero;
+
+        //if (transform.rotation.eulerAngles.z > 0.5f)
+        //{
+        //    transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, transform.rotation.z - 5f));
+        //    Debug.Log("Auto rotating");
+        //}
+        //else if (transform.rotation.eulerAngles.z < -0.5f)
+        //{
+        //    transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, transform.rotation.z + 5f));
+        //    Debug.Log("Auto rotating");
+        //}
+        //else
+        //{
+        //    transform.rotation = Quaternion.Euler(Vector3.zero);
+        //}
     }
 }

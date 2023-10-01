@@ -20,22 +20,22 @@ public class DemoData {
     }
     public bool Level2Opened
     {
-        get => bool.Parse(PlayerPrefs.GetString("Level2Opened", "false"));
+        get => bool.Parse(PlayerPrefs.GetString("Level2Opened", "true"));
         set => PlayerPrefs.SetString("Level2Opened", value.ToString());
     }
     public bool Level3Opened
     {
-        get => bool.Parse(PlayerPrefs.GetString("Level3Opened", "false"));
+        get => bool.Parse(PlayerPrefs.GetString("Level3Opened", "true"));
         set => PlayerPrefs.SetString("Level3Opened", value.ToString());
     }
     public bool Level4Opened
     {
-        get => bool.Parse(PlayerPrefs.GetString("Level4Opened", "false"));
+        get => bool.Parse(PlayerPrefs.GetString("Level4Opened", "true"));
         set => PlayerPrefs.SetString("Level4Opened", value.ToString());
     }
     public bool Level5Opened
     {
-        get => bool.Parse(PlayerPrefs.GetString("Level5Opened", "false"));
+        get => bool.Parse(PlayerPrefs.GetString("Level5Opened", "true"));
         set => PlayerPrefs.SetString("Level5Opened", value.ToString());
     }
 

@@ -11,18 +11,18 @@ public class PlayerDinamyteBoost : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Explode()
+    public void Explode(Transform self)
     {
-        // distance = transform.position.x - self.transform.position.x;
+        float distance = transform.position.x - self.transform.position.x;
         rb.velocity = Vector3.zero;
-        rb.AddForce(new Vector2(1000,750));
+        rb.AddForce(new Vector2(1000, 2* 375));
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Explode();
-        }
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    Explode();
+        //}
     }
 }
