@@ -35,6 +35,10 @@ public class MenuManager : MonoBehaviour
             1.12f, 1.125f, 1.13f, 1.13f, 1.12f, 1.09f, 1.07f, 1.03f, 1f
         };
 
+    private void Awake()
+    {
+        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+    }
 
     private void OnEnable()
     {
