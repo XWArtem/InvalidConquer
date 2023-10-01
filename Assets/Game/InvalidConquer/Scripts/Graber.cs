@@ -86,25 +86,25 @@ public class Graber : MonoBehaviour
 
     private void SetHorizontalDirection()
     {
-        if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x < -0.1)
+        if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x < -0.2)
         {
-            horizontalInputDirection = Mathf.Max(-4, horizontalInputDirection - 0.01f);
+            horizontalInputDirection = Mathf.Max(-6, horizontalInputDirection - 0.4f);
         }
-        else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x > 0.1)
+        else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x > 0.2)
         {
-            horizontalInputDirection = Mathf.Min(4, horizontalInputDirection + 0.01f);
+            horizontalInputDirection = Mathf.Min(6, horizontalInputDirection + 0.4f);
         }
         else
         {
-            if (horizontalInputDirection > 0.5f) horizontalInputDirection -= 0.04f;
-            else if (horizontalInputDirection < -0.5f) horizontalInputDirection += 0.04f;
+            if (horizontalInputDirection > 0.8f) horizontalInputDirection -= 0.4f;
+            else if (horizontalInputDirection < -0.8f) horizontalInputDirection += 0.4f;
             else horizontalInputDirection = 0f;
         }
     }
 
     private void Update()
     {
-        SetHorizontalDirection();
+        
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -130,6 +130,7 @@ public class Graber : MonoBehaviour
 
     private void FixedUpdate()
     {
+        SetHorizontalDirection();
         switch (state)
         {
             case GraberState.Idle:
