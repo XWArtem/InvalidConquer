@@ -1271,6 +1271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlatformShape
       objectReference: {fileID: 0}
+    - target: {fileID: 2453085234560727757, guid: a0acf32968cb3dc40a383063e4842a79, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3821947211831387587, guid: a0acf32968cb3dc40a383063e4842a79, type: 3}
       propertyPath: m_Enabled
       value: 1

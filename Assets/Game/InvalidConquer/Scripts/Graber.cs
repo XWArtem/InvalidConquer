@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GraberState 
@@ -66,6 +67,10 @@ public class Graber : MonoBehaviour
     private IEnumerator GrabRoutine(GrabAbility charToGrab)
     {
         GetComponent<Animation>().Play("Grab");
+        if (DemoAudioManager.instance != null)
+        {
+            DemoAudioManager.instance.PlayClipByIndex(2);
+        }
         yield return new WaitForSeconds(0.25f);
         state = GraberState.GoingUp;
         grubedPlayer = charToGrab;
@@ -114,13 +119,15 @@ public class Graber : MonoBehaviour
 
     private void Update()
     {
-        
-
+        Vector3 mousePos = Input.mousePosition;
         if (Input.GetMouseButtonDown(0))
         {
             if (state == GraberState.Idle)
             {
+                if (mousePos.x > 1780f && mousePos.x < 1880f && mousePos.y < 1040f && mousePos.y > 940f) return;
                 state = GraberState.GoingDown;
+                Debug.Log("X: " + mousePos.x);
+                Debug.Log("Y: " + mousePos.y);
             }
         }
         if (Input.GetMouseButtonUp(0))
@@ -134,7 +141,11 @@ public class Graber : MonoBehaviour
             {
                 state = GraberState.GoingUp;
             }
-            GetComponent<Animation>().Play("Ungrab");
+            if (mousePos.x > 1780f && mousePos.x < 1880f && mousePos.y < 1040f && mousePos.y > 940f) return;
+            {
+                GetComponent<Animation>().Play("Ungrab");
+            }
+            
         }
     }
 

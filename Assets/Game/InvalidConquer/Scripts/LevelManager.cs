@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.PackageManager.UI;
 
 public enum LevelStates
 { 
@@ -108,7 +107,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator GameOverDelayed()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         StartCoroutine(nameof(BlackTintSmoothAnim), true); 
     }
 

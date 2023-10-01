@@ -74,6 +74,10 @@ public class MainHero : MonoBehaviour
         {
             landingParticles.Play();
             isGrounded = true;
+            if (DemoAudioManager.instance != null)
+            {
+                DemoAudioManager.instance.PlayClipByIndex(1);
+            }
         }
     }
 }

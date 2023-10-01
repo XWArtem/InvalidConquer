@@ -55,12 +55,12 @@ public class DemoData {
     }
     public float DemoMusicVolume
     {
-        get => PlayerPrefs.GetFloat("demoMusicVolume", 0.5f);
+        get => PlayerPrefs.GetFloat("demoMusicVolume", 0.1f);
         set => PlayerPrefs.SetFloat("demoMusicVolume", value);
     }
     public float DemoSoundVolume
     {
-        get => PlayerPrefs.GetFloat("demoSoundVolume", 0.7f);
+        get => PlayerPrefs.GetFloat("demoSoundVolume", 0.3f);
         set => PlayerPrefs.SetFloat("demoSoundVolume", value);
     }
 }
