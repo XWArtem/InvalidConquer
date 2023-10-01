@@ -2811,6 +2811,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 685673269858341320, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
+      propertyPath: m_Mass
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 685673269858341320, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
+      propertyPath: m_GravityScale
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3803350361763158438, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
+      propertyPath: m_Mass
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3803350361763158438, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
+      propertyPath: m_GravityScale
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4085469987360241555, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.76
@@ -2825,7 +2841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4085469987360241555, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.38791785
       objectReference: {fileID: 0}
     - target: {fileID: 4085469987360241555, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2837,7 +2853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4085469987360241555, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.92169404
       objectReference: {fileID: 0}
     - target: {fileID: 4085469987360241555, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2849,7 +2865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4085469987360241555, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -134.35
       objectReference: {fileID: 0}
     - target: {fileID: 8472434267703639354, guid: 698b19cee8daaea4e8ab78a81a3a81d4, type: 3}
       propertyPath: m_Name
@@ -4329,7 +4345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3821947211831387587, guid: a0acf32968cb3dc40a383063e4842a79, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3821947211831387587, guid: a0acf32968cb3dc40a383063e4842a79, type: 3}
       propertyPath: m_LocalAABB.m_Center.x

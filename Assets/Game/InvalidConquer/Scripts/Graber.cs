@@ -57,7 +57,7 @@ public class Graber : MonoBehaviour
                 state = GraberState.Grabbing;
             }
         }
-        else if (collision.GetComponent<GrabAbility>() == null)
+        else if (collision.GetComponent<GrabAbility>() == null && collision.name.StartsWith("Circle") == false)
         {
             state = GraberState.GoingUp;
         }
