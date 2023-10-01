@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Game/InvalidConquer/Scenes/Menu.unity
     guid: ce68ae07298281342beb8c35c8c5d5ae
   - enabled: 1
-    path: Assets/Game/InvalidConquer/Scenes/Level.unity
+    path: Assets/Game/InvalidConquer/Scenes/Level1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

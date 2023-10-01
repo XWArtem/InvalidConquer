@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum GraberState 
 { 
     Idle,
     GoingDown,
-    GoingUp
+    GoingUp,
+    Grabbing
 }
 
 public class Graber : MonoBehaviour
@@ -21,6 +21,7 @@ public class Graber : MonoBehaviour
     private float horizontalInputDirection;
     private Vector2 defaultPosition;
     private GrabAbility grubedPlayer;
+    private bool isBusy;
 
     private bool isPlayerGrubed;
 
@@ -43,14 +44,17 @@ public class Graber : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (state == GraberState.GoingUp) return;
+        if (state == GraberState.Grabbing) return;
+        if (state == GraberState.Idle) return;
+
         if (collision.GetComponent<GrabAbility>() != null)
         {
             GrabAbility characterGrab = collision.GetComponent<GrabAbility>();
             if (characterGrab.TryGrab())
             {
-                state = GraberState.GoingUp;
-                grubedPlayer = characterGrab;
-                isPlayerGrubed = true;
+                StartCoroutine(nameof(GrabRoutine), characterGrab);
+                state = GraberState.Grabbing;
             }
         }
         else if (collision.GetComponent<GrabAbility>() == null)
@@ -59,19 +63,30 @@ public class Graber : MonoBehaviour
         }
     }
 
+    private IEnumerator GrabRoutine(GrabAbility charToGrab)
+    {
+        GetComponent<Animation>().Play("Grab");
+        yield return new WaitForSeconds(0.25f);
+        state = GraberState.GoingUp;
+        grubedPlayer = charToGrab;
+        isPlayerGrubed = true;
+    }
+
     private void SetHorizontalDirection()
     {
         if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x < -0.1)
         {
-            horizontalInputDirection = -1;
+            horizontalInputDirection = Mathf.Max(-4, horizontalInputDirection - 0.01f);
         }
         else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x > 0.1)
         {
-            horizontalInputDirection = 1;
+            horizontalInputDirection = Mathf.Min(4, horizontalInputDirection + 0.01f);
         }
         else
         {
-            horizontalInputDirection = 0;
+            if (horizontalInputDirection > 0.5f) horizontalInputDirection -= 0.04f;
+            else if (horizontalInputDirection < -0.5f) horizontalInputDirection += 0.04f;
+            else horizontalInputDirection = 0f;
         }
     }
 
@@ -97,6 +112,7 @@ public class Graber : MonoBehaviour
             {
                 state = GraberState.GoingUp;
             }
+            GetComponent<Animation>().Play("Ungrab");
         }
     }
 
@@ -122,8 +138,23 @@ public class Graber : MonoBehaviour
                     state = GraberState.Idle;
                 }
                 break;
+            case GraberState.Grabbing:
+                rb.velocity = Vector3.zero;
+                break;
             default:
                 break;
+        }
+        if (transform.rotation.eulerAngles.z > 0.5f)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, transform.rotation.z - transform.rotation.z * 0.02f));
+        }
+        else if (transform.rotation.eulerAngles.z < -0.5f)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, transform.rotation.z + transform.rotation.z * 0.02f));
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(Vector3.zero);
         }
     }
 }
