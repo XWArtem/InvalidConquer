@@ -3,13 +3,22 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
-public class GameOverPopup : MonoBehaviour
+public class LevelPassedPopup : MonoBehaviour
 {
-    [SerializeField] private Button btnToMenu, btnRestart;
-    private const string MENU_SCENE_NAME = "Menu";
+    [SerializeField] private Button btnNext, btnRestart;
+    [SerializeField] private int currentLvlIndex;
     private RectTransform rect;
     private float gameOverWindowStartY = 450f;
+    private static List<string> SCENE_NAMES = new List<string>()
+    {
+        "Level1",
+        "Level2",
+        "Level3",
+        "Level4",
+        "Level5"
+    };
 
     private static readonly List<float> curveValues = new List<float>() // 20 first
         {
@@ -22,24 +31,24 @@ public class GameOverPopup : MonoBehaviour
     private void OnEnable()
     {
         rect = GetComponent<RectTransform>();
-        btnToMenu.onClick.AddListener(GoToMenu);
+        btnNext.onClick.AddListener(NextLevel);
         btnRestart.onClick.AddListener(Restart);
     }
 
     private void OnDisable()
     {
-        btnToMenu.onClick.RemoveListener(GoToMenu);
+        btnNext.onClick.RemoveListener(NextLevel);
         btnRestart.onClick.RemoveListener(Restart);
-    }
-
-    private void GoToMenu()
-    {
-        StartCoroutine(nameof(WindowHideAction), false);
     }
 
     private void Restart()
     {
         StartCoroutine(nameof(WindowHideAction), true);
+    }
+
+    private void NextLevel()
+    {
+        StartCoroutine(nameof(WindowHideAction), false);
     }
 
     public IEnumerator WindowHideAction(bool restart)
@@ -49,7 +58,7 @@ public class GameOverPopup : MonoBehaviour
 
         while (frame > 0)
         {
-            rect.anchoredPosition = new Vector3(0f, gameOverWindowStartY - 2  * gameOverWindowStartY * curveValues[frame]);
+            rect.anchoredPosition = new Vector3(0f, gameOverWindowStartY - 2 * gameOverWindowStartY * curveValues[frame]);
             frame--;
             yield return new WaitForFixedUpdate();
         }
@@ -60,7 +69,7 @@ public class GameOverPopup : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(MENU_SCENE_NAME);
+            SceneManager.LoadScene(SCENE_NAMES[currentLvlIndex]); // it goes to the next one
         }
     }
 }
