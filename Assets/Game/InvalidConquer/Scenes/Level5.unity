@@ -3047,7 +3047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 256531894}
   timerClockImg: {fileID: 256531893}
-  overallTimeForLvl: 24
+  overallTimeForLvl: 30
   blackTint: {fileID: 256531892}
   gameOverWindow: {fileID: 256531891}
   levelPassedPopup: {fileID: 256531895}

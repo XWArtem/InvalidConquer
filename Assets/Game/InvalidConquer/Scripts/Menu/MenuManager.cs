@@ -38,7 +38,7 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     {
-        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+        Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen);
     }
 
     private void OnEnable()
@@ -77,6 +77,11 @@ public class MenuManager : MonoBehaviour
             return;
         }
         StartCoroutine(nameof(HideSequence), settingsFrameRect);
+    }
+
+    public void ApplicaionExit()
+    {
+        Application.Quit();
     }
 
     public void LevelSelectorOpen()
