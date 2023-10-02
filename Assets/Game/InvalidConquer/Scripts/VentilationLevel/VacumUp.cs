@@ -24,7 +24,7 @@ public class VacumUp : MonoBehaviour
     public IEnumerator ShootPlayer()
     {
         yield return new WaitForSeconds(3f);
-
+        yield return new WaitForFixedUpdate();
         rbPlayer.transform.position = shootPos;
         rbPlayer.velocity = Vector2.zero;
         isVacuming = false;
