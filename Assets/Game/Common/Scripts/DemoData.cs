@@ -20,27 +20,27 @@ public class DemoData {
     }
     public bool Level2Opened
     {
-        get => bool.Parse(PlayerPrefs.GetString("Level2Opened", "true"));
+        get => bool.Parse(PlayerPrefs.GetString("Level2Opened", "false"));
         set => PlayerPrefs.SetString("Level2Opened", value.ToString());
     }
     public bool Level3Opened
     {
-        get => bool.Parse(PlayerPrefs.GetString("Level3Opened", "true"));
+        get => bool.Parse(PlayerPrefs.GetString("Level3Opened", "false"));
         set => PlayerPrefs.SetString("Level3Opened", value.ToString());
     }
     public bool Level4Opened
     {
-        get => bool.Parse(PlayerPrefs.GetString("Level4Opened", "true"));
+        get => bool.Parse(PlayerPrefs.GetString("Level4Opened", "false"));
         set => PlayerPrefs.SetString("Level4Opened", value.ToString());
     }
     public bool Level5Opened
     {
-        get => bool.Parse(PlayerPrefs.GetString("Level5Opened", "true"));
+        get => bool.Parse(PlayerPrefs.GetString("Level5Opened", "false"));
         set => PlayerPrefs.SetString("Level5Opened", value.ToString());
     }
     public bool Level6Opened
     {
-        get => bool.Parse(PlayerPrefs.GetString("Level6Opened", "true"));
+        get => bool.Parse(PlayerPrefs.GetString("Level6Opened", "false"));
         set => PlayerPrefs.SetString("Level6Opened", value.ToString());
     }
     public int SubIndex {

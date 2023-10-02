@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum LevelStates
 { 
@@ -18,10 +19,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float overallTimeForLvl;
     [SerializeField] private Image blackTint;
     [SerializeField] private RectTransform gameOverWindow;
+    [SerializeField] private LevelPassedPopup levelPassedPopup;
     private float timeLeft;
     private bool isGrabbing;
     private float gameOverWindowStartY = 450f;
-    private bool gameIsOn;
+    public bool GameIsOn;
+    public bool IsPaused;
 
     private static readonly List<float> curveValues = new List<float>() // 20 first
         {
@@ -44,7 +47,7 @@ public class LevelManager : MonoBehaviour
         isGrabbing = false;
         timeLeft = overallTimeForLvl;
         UpdateTimerTxt();
-        gameIsOn = true;
+        GameIsOn = true;
     }
 
     private void OnEnable()
@@ -60,17 +63,22 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(nameof(BlackTintSmoothAnim), false);
+        IsPaused = false;
     }
 
     private void UpdateGrabbingState(bool isGrabbing) => this.isGrabbing = isGrabbing;
 
     public void FinishLevel()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+        levelPassedPopup.ShowWindow();
+        if (SceneManager.GetActiveScene().name == "Level1") DemoData.Instance.Level2Opened = true;
+        if (SceneManager.GetActiveScene().name == "Level2") DemoData.Instance.Level3Opened = true;
+        if (SceneManager.GetActiveScene().name == "Level3") DemoData.Instance.Level4Opened = true;
+        if (SceneManager.GetActiveScene().name == "Level4") DemoData.Instance.Level5Opened = true;
+        if (SceneManager.GetActiveScene().name == "Level5") DemoData.Instance.Level6Opened = true;
         //popup
     }
-
-    
 
     public IEnumerator GameOverView()
     {
@@ -100,11 +108,11 @@ public class LevelManager : MonoBehaviour
         {
             timeLeft -= Time.deltaTime;
             UpdateTimerTxt();
-            if (timeLeft <= 0f && gameIsOn)
+            if (timeLeft <= 0f && GameIsOn)
             {
                 Graber.instance.ForceUngrab();
                 StartCoroutine(nameof(GameOverDelayed));
-                gameIsOn = false;
+                GameIsOn = false;
             }
         }
     }
@@ -117,10 +125,10 @@ public class LevelManager : MonoBehaviour
 
     public void ZoneDeath()
     {
-        if (gameIsOn)
+        if (GameIsOn)
         {
             StartCoroutine(nameof(BlackTintSmoothAnim), true);
-            gameIsOn = false;
+            GameIsOn = false;
         }
     }
 

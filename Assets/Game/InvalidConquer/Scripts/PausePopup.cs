@@ -32,7 +32,10 @@ public class PausePopup : MonoBehaviour
     }
     public void PauseWindowShow()
     {
-        StartCoroutine(nameof(WindowShow));
+        if (LevelManager.instance.GameIsOn)
+        {
+            StartCoroutine(nameof(WindowShow));
+        }
     }
 
     private void Restart()

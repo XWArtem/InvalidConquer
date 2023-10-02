@@ -8,7 +8,8 @@ public class Finish : MonoBehaviour
     {
         if (collision.name.StartsWith("Player"))
         {
-            LevelManager.instance.FinishLevel();
+            if (LevelManager.instance != null) LevelManager.instance.FinishLevel();
+            else StaticActions.OnLevelPassed?.Invoke();
         }
     }
 }

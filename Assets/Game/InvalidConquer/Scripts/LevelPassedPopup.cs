@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class LevelPassedPopup : MonoBehaviour
 {
@@ -17,7 +16,8 @@ public class LevelPassedPopup : MonoBehaviour
         "Level2",
         "Level3",
         "Level4",
-        "Level5"
+        "Level5",
+        "Level6"
     };
 
     private static readonly List<float> curveValues = new List<float>() // 20 first
@@ -51,9 +51,28 @@ public class LevelPassedPopup : MonoBehaviour
         StartCoroutine(nameof(WindowHideAction), false);
     }
 
-    public IEnumerator WindowHideAction(bool restart)
+    public void ShowWindow()
+    {
+        StartCoroutine(nameof(ShowWindowRoutine));
+    }
+
+    private IEnumerator ShowWindowRoutine()
     {
         rect.anchoredPosition = new Vector3(0f, gameOverWindowStartY);
+        int frame = 0;
+
+        while (frame < curveValues.Count)
+        {
+            rect.anchoredPosition = new Vector3(0f, gameOverWindowStartY - 2 * gameOverWindowStartY * curveValues[frame]);
+            frame++;
+            yield return new WaitForFixedUpdate();
+        }
+        rect.anchoredPosition = new Vector3(0f, -gameOverWindowStartY);
+    }
+
+    public IEnumerator WindowHideAction(bool restart)
+    {
+        rect.anchoredPosition = new Vector3(0f, -gameOverWindowStartY);
         int frame = curveValues.Count - 1;
 
         while (frame > 0)
@@ -69,7 +88,14 @@ public class LevelPassedPopup : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(SCENE_NAMES[currentLvlIndex]); // it goes to the next one
+            if (SceneManager.GetActiveScene().name != "Level6")
+            {
+                SceneManager.LoadScene(SCENE_NAMES[currentLvlIndex]); // it goes to the next one
+            }
+            else
+            {
+                SceneManager.LoadScene("Menu");
+            }
         }
     }
 }

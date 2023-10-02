@@ -732,6 +732,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2373979771260491673, guid: ac05ef3ad1948dc4e86548053960a133, type: 3}
+      propertyPath: currentLvlIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4535216733629990947, guid: ac05ef3ad1948dc4e86548053960a133, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -822,7 +826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6469193766382651827, guid: ac05ef3ad1948dc4e86548053960a133, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -854,6 +858,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &191036969 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2373979771260491673, guid: ac05ef3ad1948dc4e86548053960a133, type: 3}
+  m_PrefabInstance: {fileID: 191036965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22d57a3549883a440aa341a3c4111048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &311577624
@@ -1254,6 +1269,9 @@ MonoBehaviour:
   overallTimeForLvl: 8
   blackTint: {fileID: 191036967}
   gameOverWindow: {fileID: 191036966}
+  levelPassedPopup: {fileID: 191036969}
+  GameIsOn: 0
+  IsPaused: 0
 --- !u!1001 &1556044162
 PrefabInstance:
   m_ObjectHideFlags: 0

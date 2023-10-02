@@ -10,6 +10,7 @@ public class Tutorial : MonoBehaviour
     private Image leftArrowImg, rightArrowImg;
     private Image mouseClickImg;
     [SerializeField] private Transform player;
+    [SerializeField] private LevelPassedPopup levelPassedPopup;
     private float leftArrowStartX, rightArrowStartX;
     private float arrowsY = 373f;
     private bool isGrabbed;
@@ -19,16 +20,26 @@ public class Tutorial : MonoBehaviour
     {
         isFirstGrabbling = true;
         StaticActions.OnMainHeroGrabbed += SetIsGrabbed;
+        StaticActions.OnLevelPassed += FinishLevel;
     }
 
     private void OnDisable()
     {
         StaticActions.OnMainHeroGrabbed -= SetIsGrabbed;
+        StaticActions.OnLevelPassed -= FinishLevel;
     }
 
     private void SetIsGrabbed(bool isGrabbed)
     {
         this.isGrabbed = isGrabbed;
+    }
+
+    public void FinishLevel()
+    {
+        //Time.timeScale = 0f;
+        levelPassedPopup.ShowWindow();
+        DemoData.Instance.Level2Opened = true;
+        //popup
     }
 
     private void Start()
@@ -55,55 +66,72 @@ public class Tutorial : MonoBehaviour
         {
             if (Graber.instance.transform.position.x - player.position.x > 0.5f)
             {
-                leftArrow.SetActive(true);
-                leftArrow.transform.localPosition = new Vector2(leftArrowStartX, arrowsY);
-                rightArrow.SetActive(false);
-                byte a = 0;
-                while (a < 249)
+                if (!isGrabbed)
                 {
-                    a += 5;
+                    leftArrow.SetActive(true);
+                    leftArrow.transform.localPosition = new Vector2(leftArrowStartX, arrowsY);
+                    rightArrow.SetActive(false);
+                    byte a = 0;
+                    while (a < 249)
+                    {
+                        a += 5;
+                        leftArrowImg.color = new Color32(255, 255, 255, a);
+                        yield return new WaitForFixedUpdate();
+                        leftArrow.transform.position += new Vector3(-1f, 0f);
+                    }
+                    a = 255;
                     leftArrowImg.color = new Color32(255, 255, 255, a);
-                    yield return new WaitForFixedUpdate();
-                    leftArrow.transform.position += new Vector3(-1f, 0f);
-                }
-                a = 255;
-                leftArrowImg.color = new Color32(255, 255, 255, a);
-                while (a > 6)
-                {
-                    a -= 5;
-                    leftArrowImg.color = new Color32(255, 255, 255, a);
-                    yield return new WaitForFixedUpdate();
-                    leftArrow.transform.position += new Vector3(-1f, 0f);
-                }
-                leftArrow.SetActive(false);
+                    while (a > 6)
+                    {
+                        a -= 5;
+                        leftArrowImg.color = new Color32(255, 255, 255, a);
+                        yield return new WaitForFixedUpdate();
+                        leftArrow.transform.position += new Vector3(-1f, 0f);
+                    }
+                    leftArrow.SetActive(false);
 
-                yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(1);
+                }
+                else
+                {
+                    isFirstGrabbling = false;
+                    yield return null;
+                }
+
             }
             else if (Graber.instance.transform.position.x - player.position.x < -0.5f)
             {
-                leftArrow.SetActive(false);
-                rightArrow.SetActive(true);
-                rightArrow.transform.localPosition = new Vector2(rightArrowStartX, arrowsY);
-                byte a = 0;
-                while (a < 249)
+                if (!isGrabbed)
                 {
-                    a += 5;
+                    leftArrow.SetActive(false);
+                    rightArrow.SetActive(true);
+                    rightArrow.transform.localPosition = new Vector2(rightArrowStartX, arrowsY);
+                    byte a = 0;
+                    while (a < 249)
+                    {
+                        a += 5;
+                        rightArrowImg.color = new Color32(255, 255, 255, a);
+                        yield return new WaitForFixedUpdate();
+                        rightArrow.transform.position += new Vector3(1f, 0f);
+                    }
+                    a = 255;
                     rightArrowImg.color = new Color32(255, 255, 255, a);
-                    yield return new WaitForFixedUpdate();
-                    rightArrow.transform.position += new Vector3(1f, 0f);
-                }
-                a = 255;
-                rightArrowImg.color = new Color32(255, 255, 255, a);
-                while (a > 6)
-                {
-                    a -= 5;
-                    rightArrowImg.color = new Color32(255, 255, 255, a);
-                    yield return new WaitForFixedUpdate();
-                    rightArrow.transform.position += new Vector3(1f, 0f);
-                }
-                rightArrow.SetActive(false);
+                    while (a > 6)
+                    {
+                        a -= 5;
+                        rightArrowImg.color = new Color32(255, 255, 255, a);
+                        yield return new WaitForFixedUpdate();
+                        rightArrow.transform.position += new Vector3(1f, 0f);
+                    }
+                    rightArrow.SetActive(false);
 
-                yield return new WaitForSeconds(1);
+                    yield return new WaitForSeconds(1);
+                }
+                else
+                {
+                    isFirstGrabbling = false;
+                    yield return null;
+                }
             }
             else
             {
